@@ -22,6 +22,7 @@ config_mx28() {
 
 build_uboot() {
     make ARCH=arm CROSS_COMPILE=$CC
+    cp ./tools/mkimage ../../bin/
     cp -av u-boot ../imx-bootlets-src-10.12.01/
     sleep 3
     cd ../imx-bootlets-src-10.12.01/
