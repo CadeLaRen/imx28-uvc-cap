@@ -1,0 +1,1 @@
+qmlviewer  main.qml  -maximized -frameless -decoration ZyDecoration 

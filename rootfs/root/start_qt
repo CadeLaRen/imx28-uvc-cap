@@ -1,0 +1,50 @@
+#!/bin/sh
+SCRIPT_PATH=`cd "$(dirname "$0")" ; pwd`
+cd "$SCRIPT_PATH"
+
+devs_list=`ls /dev/input/event*`
+has_ts=0
+QWS_MOUSE_PROTO=""
+QWS_KEYBOARD=""
+for dev in $devs_list 
+do
+    input_type "$dev"
+    case $? in
+    1)  QWS_MOUSE_PROTO="$QWS_MOUSE_PROTO ""Tslib:$dev" 
+        has_ts=1
+        ;;
+    2)  QWS_MOUSE_PROTO="$QWS_MOUSE_PROTO ""LinuxInput:$dev" 
+        ;;
+    3)  QWS_KEYBOARD="$QWS_KEYBOARD ""LinuxInput:$dev"
+        ;;
+    *)  ;;
+    esac
+done
+
+# delete space in head an tail
+QWS_MOUSE_PROTO=`echo $QWS_MOUSE_PROTO`
+QWS_KEYBOARD=`echo $QWS_KEYBOARD`
+
+echo "[QWS_MOUSE_PROTO=$QWS_MOUSE_PROTO]"
+echo "[QWS_KEYBOARD=$QWS_KEYBOARD]"
+
+export "QWS_MOUSE_PROTO=$QWS_MOUSE_PROTO"
+export "QWS_KEYBOARD=$QWS_KEYBOARD"
+
+#   判断触摸屏校准文件是否存在
+#if [ "$has_ts" == "1" -a ! -f /etc/pointercal ] ; then
+#    ts_calibrate
+#fi
+
+export TSLIB_CALIBFILE=/etc/pointercal
+export TSLIB_CONFFILE=/etc/ts.conf
+export TSLIB_PLUGINDIR=/usr/lib/ts
+
+export LDPATH=/usr/lib
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$LDPATH
+export QT_QWS_FONTDIR=$LDPATH/fonts
+export QT_PLUGIN_PATH=$LDPATH/qt/plugins:$SCRIPT_PATH/framework/plugins
+export POINTERCAL_FILE=$SCRIPT_PATH/framework/qt_pointercal
+
+fb_set /dev/fb0
+./qt_hellow_zh -qws

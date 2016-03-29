@@ -1,0 +1,15 @@
+#!/bin/sh
+
+echo 69 > /sys/class/gpio/export    
+gpiovalue=`cat /sys/class/gpio/gpio69/value`
+
+if [ "$gpiovalue" == "0" ] ; then
+	ifconfig eth0 192.168.0.23
+	cd  /usr/test/280test/
+	ping 192.168.0.100  > /usr/test/280test/eth0 & 
+        /usr/test/280test/device_test >/dev/ttyAM0
+	kill -9 `ps | grep ping` 2> /dev/null
+	cd -
+fi
+
+echo 69 > /sys/class/gpio/unexport

@@ -1,0 +1,15 @@
+###########---USB---################
+#----------------------------------#
+KERNEL=="sd[a-z]*", SUBSYSTEM=="block", ACTION=="add", RUN+="/etc/udev/rules.d/zhiyuan_udev.sh usb %k"
+KERNEL=="sd[a-z]*", SUBSYSTEM=="block", ACTION=="remove", RUN+="/etc/udev/rules.d/zhiyuan_udev.sh usb %k", OPTIONS="last_rule"
+##########---CF card---#############
+#----------------------------------#
+KERNEL=="hd[a-z]*", SUBSYSTEM=="block", ACTION=="add", RUN+="/etc/udev/rules.d/zhiyuan_udev.sh cf %k"
+KERNEL=="hd[a-z]*", SUBSYSTEM=="block", ACTION=="remove", RUN+="/etc/udev/rules.d/zhiyuan_udev.sh cf %k", OPTIONS="last_rule"
+#########-----SD------##############
+#----------------------------------#
+KERNEL=="mmcblk[0-9]*", SUBSYSTEM=="block", ACTION=="add", RUN+="/etc/udev/rules.d/zhiyuan_udev.sh sd %k" 
+KERNEL=="mmcblk[0-9]*", SUBSYSTEM=="block", ACTION=="remove", RUN+="/etc/udev/rules.d/zhiyuan_udev.sh sd %k", OPTIONS="last_rule"
+
+
+

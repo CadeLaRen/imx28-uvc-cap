@@ -1,0 +1,1 @@
+qmlviewer  dialcontrol.qml -maximized -frameless -decoration ZyDecoration 

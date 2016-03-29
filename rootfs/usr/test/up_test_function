@@ -1,0 +1,30 @@
+#!/bin/sh
+
+test_value=`cat /sys/devices/platform/zlg-systemType/board_name`
+
+if [ ! $test_value = "280"  ] ; then
+if [ ! -f /etc/pointercal ] ; then
+    ts_calibrate
+    sync
+fi
+fi
+
+
+if [ $test_value = "287B" ] 
+then
+	echo "start 287B test "
+	/usr/test/287B_test/start_test
+fi
+
+if [ $test_value = "280" ] 
+then
+	echo "start 280 test "
+	/usr/test/280test/start_test
+fi
+
+if [ $test_value = "283" ] 
+then
+	echo "start 283 test "
+	/usr/test/283A_test/start_test
+fi
+

@@ -1,0 +1,1 @@
+qmlviewer transitions.qml -frameless -maximized -decoration ZyDecoration

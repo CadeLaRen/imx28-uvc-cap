@@ -1,0 +1,24 @@
+debug
+nodetach
+lock
+/dev/ttyUSB2
+115200
+usepeerdns
+nocrtscts 
+noauth
+noipdefault
+defaultroute
+#novj
+#novjccomp
+#noccp
+#ipcp-accept-local
+#ipcp-accept-remote
+user	"ctnet@mycdma.cn"
+passwd	"vnet.mobi"
+lcp-echo-interval 30
+lcp-echo-failure 4
+#logfile /tmp/ppplog
+connect "/usr/sbin/chat -s -v -f /etc/ppp/chat-connect -T *99#"
+disconnect "/usr/sbin/chat -s -v -f /etc/ppp/chat-disconnect"
+
+

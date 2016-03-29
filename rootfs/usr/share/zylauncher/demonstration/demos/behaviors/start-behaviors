@@ -1,0 +1,1 @@
+qmlviewer behavior-example.qml -frameless -maximized -decoration ZyDecoration

@@ -1,0 +1,6 @@
+#!/bin/sh
+
+insmod /usr/test/287B_test/gpio_driver_287.ko
+insmod /usr/test/287B_test/lradc.ko
+insmod /usr/test/287B_test/mxs-hsadc.ko
+insmod /usr/test/287B_test/beep.ko

@@ -1,0 +1,43 @@
+#!/bin/sh
+
+source_usb_file="/dev/shm/usb_test_sdb_file"
+targe_usb_file=""
+
+rm -rf $source_usb_file
+
+isexit=`cat /proc/partitions | grep sdb | wc -l`
+
+if [ $isexit == '0' ] ;
+then
+#	echo "no usb_host2 storge! "
+	exit 1
+fi
+
+usb_dri=`df -h | awk '/\/dev\/sdb/' | sed -n '1p' | awk '{print $6}'`
+
+echo $usb_dri
+
+targe_usb_file=$usb_dri
+
+dd if=/dev/urandom of=$source_usb_file bs=1k count=100 2> /dev/null
+rm -rf $targe_usb_file 2> /dev/null
+cp $source_usb_file $targe_usb_file 2> /dev/null
+sync
+
+source_md5=`md5sum $source_usb_file | awk '{print $1}'`
+targe_md5=`md5sum $source_usb_file | awk '{print $1}'`
+
+
+echo $source_md5
+echo $targe_md5
+	
+if [ $source_md5 == $targe_md5 ] ;
+then 
+	echo "usb_host2 test success!"
+	exit 0
+else
+	echo "usb_host2 filesystem error!"
+	exit 1
+fi
+
+return 0

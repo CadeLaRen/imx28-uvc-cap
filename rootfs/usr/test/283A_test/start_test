@@ -1,0 +1,17 @@
+#!/bin/sh
+
+echo 52 > /sys/class/gpio/export
+
+gpiovalue=`cat /sys/class/gpio/gpio52/value`
+
+if [ "$gpiovalue" == "0" ] ; then
+        cd  /usr/test/283A_test
+        ifconfig eth0 192.168.0.23
+        insmod /usr/test/283A_test/gpio_driver_283.ko
+        insmod /usr/test/283A_test/lradc.ko
+        insmod /usr/test/283A_test/mxs-hsadc.ko
+        /usr/test/283A_test/device_test -qws
+        cd -
+fi
+
+echo 52 > /sys/class/gpio/unexport

@@ -1,0 +1,9 @@
+sleep 3
+str=`cat /proc/partitions | grep sda`
+if [ -n "$str" ];then
+        echo "usb otg success"
+        exit 0
+else
+        echo "usb otg fail"
+        exit 1
+fi

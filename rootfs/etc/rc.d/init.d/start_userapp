@@ -1,0 +1,23 @@
+#!/bin/sh
+ifconfig eth0 hw ether 02:00:92:B3:C4:08 
+ifconfig eth0 192.168.0.100 
+#ifconfig eth0 down
+
+#you can add your app start_command here
+
+# start ssh
+/bin/dropbear
+#start qt command,you can delete it
+export TSLIB_PLUGINDIR=/usr/lib/ts/
+export TSLIB_CONFFILE=/etc/ts.conf
+export TSLIB_TSDEVICE=/dev/input/ts0
+export TSLIB_CALIBFILE=/etc/pointercal
+export QT_QWS_FONTDIR=/usr/lib/fonts
+export QWS_MOUSE_PROTO=Tslib:/dev/input/ts0
+
+boardname=`cat /sys/devices/platform/zlg-systemType/board_name`
+if [ ! $boardname = "280" ]
+then
+	/usr/share/zylauncher/start_zylauncher >/dev/null &
+fi
+

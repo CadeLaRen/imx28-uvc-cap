@@ -1,0 +1,42 @@
+#!/bin/sh
+
+source_sd_file="/dev/shm/sd_test_file"
+targe_sd_file=""
+
+rm -rf $source_usb_file
+
+isexit=`cat /proc/partitions | grep mmcblk0 | wc -l`
+
+if [ $isexit == '0' ] ;
+then
+	echo "no sd card detected "
+	exit 1
+fi
+
+sd_dri=`df -h | awk '/\/dev\/mmcblk0/' | sed -n '1p' | awk '{print $6}'`
+
+echo $sd_dri
+
+targe_sd_file=$sd_dri/sd_test_file
+
+dd if=/dev/urandom of=$source_sd_file bs=1k count=100
+cp -av $source_sd_file $targe_sd_file
+sync
+
+source_md5=`md5sum $source_sd_file | awk '{print $1}'`
+targe_md5=`md5sum $targe_sd_file | awk '{print $1}'`
+
+
+echo $source_md5
+echo $targe_md5
+	
+if [ $source_md5 == $targe_md5 ] ;
+then 
+	echo "sd test success"
+	exit 0
+else
+	echo "usb filesystem error"
+	exit 1
+fi
+
+return 0

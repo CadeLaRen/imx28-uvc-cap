@@ -1,0 +1,1 @@
+qmlviewer -frameless clocks.qml -maximized -decoration ZyDecoration 

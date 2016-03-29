@@ -1,0 +1,11 @@
+#!/bin/sh
+##############################################################
+echo "package rootfs.ubifs..."
+
+mkfs.ubifs -r rootfs  -m 2048 -e 126976 -c 1900 -o ubifs.img
+ubinize -o ubi.img -m 2048 -p 128KiB -s 512 bin/ubinize.cfg  
+mv ubifs.img rootfs.ubifs
+rm -rf ubi.img
+
+#cp -av  rootfs.ubifs  /nfsroot/
+

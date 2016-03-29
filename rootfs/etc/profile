@@ -1,0 +1,45 @@
+PATH=/iptables/bin:/iptables/sbin:/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin
+
+test_value=`/bin/cat /sys/devices/platform/zlg-systemType/board_name`
+
+if [ $test_value = "287B" ]
+then
+        echo "this board is EasyARM-iMX287B"
+        export HOSTNAME="EasyARM-iMX287B"
+fi
+
+if [ $test_value = "280" ]
+then
+        echo "this board is EasyARM-iMX280A"
+        export HOSTNAME="EasyARM-iMX280"
+fi
+
+if [ $test_value = "283" ]
+then
+        echo "this board is EasyARM-iMX283"
+        export HOSTNAME="EasyARM-iMX283"
+fi
+
+
+#PS1='[\u@\h \W]\# '
+PS1='[\u@$HOSTNAME \W]\# '
+
+export PATH
+
+alias ll='ls -l'
+alias la='ll -a'
+
+export PS1='\u@\h \w# '
+export PS2='> '
+export PS3='? '
+export PS4='[$LINENO]+'
+
+export GST_PLUGIN_PATH=/usr/lib/fsl_mm_linux/lib/gstreamer-0.10
+
+export TSLIB_PLUGINDIR=/usr/lib/ts/
+export TSLIB_CONFFILE=/etc/ts.conf
+export TSLIB_TSDEVICE=/dev/input/ts0
+export TSLIB_CALIBFILE=/etc/pointercal
+export QT_QWS_FONTDIR=/usr/lib/fonts
+export QWS_MOUSE_PROTO=Tslib:/dev/input/ts0
+
