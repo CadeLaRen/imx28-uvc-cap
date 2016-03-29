@@ -1,0 +1,19 @@
+prefix=/opt/gcc-4.4.4-glibc-2.11.1-multilib-1.0/arm-fsl-linux-gnueabi
+exec_prefix=${prefix}
+libdir=${prefix}/lib
+includedir=${prefix}/include/QtNetwork
+qt_config=lex yacc warn_on uic resources qt warn_on release incremental link_prl def_files_disabled no_mocdepend release stl qt_no_framework cross_compile release shared dll embedded largefile stl precompile_header exceptions_off dylib create_prl link_prl depend_includepath QTDIR_build qt_install_headers qt warn_on depend_includepath qmake_cache target_qt hide_symbols create_libtool create_pc explicitlib moc thread shared dll
+moc_location=/opt/gcc-4.4.4-glibc-2.11.1-multilib-1.0/arm-fsl-linux-gnueabi/bin/moc
+uic_location=/opt/gcc-4.4.4-glibc-2.11.1-multilib-1.0/arm-fsl-linux-gnueabi/bin/uic
+rcc_location=/opt/gcc-4.4.4-glibc-2.11.1-multilib-1.0/arm-fsl-linux-gnueabi/bin/rcc
+lupdate_location=/opt/gcc-4.4.4-glibc-2.11.1-multilib-1.0/arm-fsl-linux-gnueabi/bin/lupdate
+lrelease_location=/opt/gcc-4.4.4-glibc-2.11.1-multilib-1.0/arm-fsl-linux-gnueabi/bin/lrelease
+
+Name: Qtnetwork
+Description: Qtnetwork Library
+Version: 4.8.0
+Libs: -L${libdir} -lQtNetwork 
+Libs.private: -L/opt/gcc-4.4.4-glibc-2.11.1-multilib-1.0/arm-fsl-linux-gnueabi/lib -L/opt/gcc-4.4.4-glibc-2.11.1-multilib-1.0/arm-fsl-linux-gnueabi/lib  -lQtCore -L/opt/gcc-4.4.4-glibc-2.11.1-multilib-1.0/arm-fsl-linux-gnueabi/lib -L/opt/gcc-4.4.4-glibc-2.11.1-multilib-1.0/arm-fsl-linux-gnueabi/lib -lpthread   
+Cflags: -DQT_SHARED -I/opt/gcc-4.4.4-glibc-2.11.1-multilib-1.0/arm-fsl-linux-gnueabi/include -I${includedir}
+Requires: QtCore
+
