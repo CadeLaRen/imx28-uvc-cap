@@ -37,4 +37,4 @@ then
 fi
 
 # SIM7100 dongle
-insmod /root/usbserial.ko vendor=0x1e0e product=0x9001
+insmod /lib/modules/usbserial.ko vendor=0x1e0e product=0x9001

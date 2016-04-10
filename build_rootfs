@@ -8,4 +8,5 @@ mv ubifs.img rootfs.ubifs
 rm -rf ubi.img
 
 #cp -av  rootfs.ubifs  /nfsroot/
+cp -av rootfs.ubifs /home/xzwang/xzwang/tftpboot/
 
