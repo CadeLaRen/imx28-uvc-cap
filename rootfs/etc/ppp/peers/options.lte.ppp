@@ -1,0 +1,13 @@
+debug updetach
+/dev/ttySM0
+460800
+noipdefault
+defaultroute
+usepeerdns
+noauth
+persist
+lcp-echo-interval 30
+lcp-echo-failure 4
+logfile /tmp/ppplog
+connect "/usr/sbin/chat -v -f /tmp/ppp/chat-connect -T *98#"
+disconnect "/usr/sbin/chat -v -f /tmp/ppp/chat-disconnect"

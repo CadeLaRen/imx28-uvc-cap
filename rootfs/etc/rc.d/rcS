@@ -36,4 +36,5 @@ then
     /etc/rc.d/rc.local $mode
 fi
 
-insmod /root/usbserial.ko vendor=0x1e01 product=0x9001
+# SIM7100 dongle
+insmod /root/usbserial.ko vendor=0x1e0e product=0x9001
