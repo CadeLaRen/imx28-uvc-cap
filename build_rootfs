@@ -1,5 +1,8 @@
 #!/bin/sh
 ##############################################################
+cp -avf proj/pppdd ./rootfs/root/
+cp -avf proj/v4l2_uvc ./rootfs/root/
+
 echo "package rootfs.ubifs..."
 
 mkfs.ubifs -r rootfs  -m 2048 -e 126976 -c 1900 -o ubifs.img
