@@ -202,6 +202,18 @@ int main(int argc, char *argv[])
 	context *pctx;
 	input *in;
 	char buf[512];
+	int send = 0, backgroud = 0, i;
+
+	for (i = 1; i < argc; i++) {
+		if (!strcmp(argv[i], "tcp")) {
+			send = 1;
+		}
+		if (!strcmp(argv[i], "deamon")) {
+			backgroud = 1;
+		}
+	}
+	if (backgroud)
+		daemon_mode();
 
 	pctx = calloc(1, sizeof(context));
 	if (pctx == NULL) {
@@ -240,19 +252,21 @@ int main(int argc, char *argv[])
 		goto exit;
         }
 
-	// register output video stream
-	ret = output_init(5555);	// udp port
-	if (ret < 0 ) {
+	if (send) {
+	    // register output video stream
+            ret = output_init("192.168.0.99", 5500);	// tcp
+	    if (ret < 0 ) {
 		goto exit;
+	    }
 	}
-#if 1	
 	ret = input_run(pctx);
 	if (ret < 0) {
 		goto exit;	
 	}
-	
-	ret = output_run(pctx->in);
-#endif
+
+	if (send)
+		ret = output_run(pctx->in);
+
 	in = pctx->in;
 	while (!stop && in) {
 		/* save_jpeg(in->buf, in->size); */
@@ -268,7 +282,8 @@ int main(int argc, char *argv[])
 	/* wait for signals */
 	pause();
 
-	output_stop();
+	if (send)
+		output_stop();
 exit:
 	if (pctx->in->buf)
 		free(pctx->in->buf);

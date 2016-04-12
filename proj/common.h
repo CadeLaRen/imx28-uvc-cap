@@ -11,6 +11,14 @@
 #include <time.h>
 #include <syslog.h>
 
+#define ABS(a) (((a) < 0) ? -(a) : (a))
+#ifndef MIN
+#define MIN(a, b) (((a) < (b)) ? (a) : (b))
+#endif
+#ifndef MAX
+#define MAX(a, b) (((a) > (b)) ? (a) : (b))
+#endif
+#define LENGTH_OF(x) (sizeof(x)/sizeof(x[0]))
 
 #define eval(cmd, args...) ({ \
         char *argv[] = { cmd, ## args, NULL }; \
@@ -64,6 +72,7 @@
     } \
 }
 
+void daemon_mode(void);
 void hex_dump(const char *prompt, unsigned char *buf, int len);
 int pidof(const char *name);
 int sysprintf(const char *fmt, ...);

@@ -180,7 +180,7 @@ static int v4l2_packet_parse(context *pctx, unsigned char op, unsigned char *dat
 			}
 			break;
 		case CMD_SUB_V4L2_RST_VALUE:
-			ret = v4l2ResetControl(pctx->videoIn, id);
+			ret = v4l2ResetControl(pctx, id);
 			break;	
 		defualt:
 			break;

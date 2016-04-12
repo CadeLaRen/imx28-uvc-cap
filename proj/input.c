@@ -741,15 +741,17 @@ int v4l2SetControl(struct vdIn *vd, int control_id, int value, input *in)
 /******************************************************************************
 * @Description.:v4l2ResetControl 
 * @Input Value.:
-* 		@vd
+* 		@pctx
 * 		@control
 * @Return Value:
 ******************************************************************************/
-int v4l2ResetControl(struct vdIn *vd, int control)
+int v4l2ResetControl(context *pctx, int control)
 {
+    struct vdIn *vd = pctx->videoIn;
+    input *in = pctx->in;
     struct v4l2_control control_s;
     struct v4l2_queryctrl queryctrl;
-    int val_def;
+    int val_def, i;
     int err;
 
     if(isv4l2Control(vd, control, &queryctrl) < 0)
@@ -761,6 +763,13 @@ int v4l2ResetControl(struct vdIn *vd, int control)
 
     if((err = xioctl(vd->fd, VIDIOC_S_CTRL, &control_s)) < 0) {
         return -1;
+    }
+
+    for (i = 0; i < in->parametercount; i++) {
+	if (in->in_parameters[i].ctrl.id == control) {
+	    in->in_parameters[i].value = val_def;	
+	    break;
+	}
     }
 
     return 0;
