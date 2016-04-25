@@ -14,7 +14,7 @@ defaultroute
 #ipcp-accept-local
 #ipcp-accept-remote
 user	"ctnet@mycdma.cn"
-passwd	"vnet.mobi"
+password "vnet.mobi"
 lcp-echo-interval 30
 lcp-echo-failure 4
 #logfile /tmp/ppplog
